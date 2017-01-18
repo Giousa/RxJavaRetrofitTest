@@ -9,8 +9,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.giousa.rxjavaretrofittest.entity.MovieEntity;
+import com.giousa.rxjavaretrofittest.entity.SubjectBean;
 import com.giousa.rxjavaretrofittest.http.MovieService;
 import com.giousa.rxjavaretrofittest.utils.HttpMethods;
+
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -56,10 +59,8 @@ public class MainActivity extends AppCompatActivity {
 
 //        obtainDataOne();
 //        obtainDataTwo();
-        obtainDataThree();
-
-
-
+//        obtainDataThree();
+        obtainDataFour();
 
     }
 
@@ -123,21 +124,47 @@ public class MainActivity extends AppCompatActivity {
 
     private void obtainDataThree() {
 
-        Subscriber<MovieEntity> subscriber = new Subscriber<MovieEntity>() {
+//        Subscriber<MovieEntity> subscriber = new Subscriber<MovieEntity>() {
+//            @Override
+//            public void onCompleted() {
+//                Log.d(TAG,"three onCompleted");
+//            }
+//
+//            @Override
+//            public void onError(Throwable e) {
+//                Log.d(TAG,"three onError");
+//            }
+//
+//            @Override
+//            public void onNext(MovieEntity movieEntity) {
+//                Log.d(TAG,"three onNext="+movieEntity.toString());
+//            }
+//        };
+//
+//        HttpMethods.getInstance().getTopMovie(subscriber, 0, 10);
+    }
+
+
+    private void obtainDataFour() {
+        Subscriber<List<SubjectBean>> subscriber = new Subscriber<List<SubjectBean>>() {
             @Override
             public void onCompleted() {
-                Log.d(TAG,"three onCompleted");
+                Log.d(TAG, "four onCompleted");
             }
 
             @Override
             public void onError(Throwable e) {
-                Log.d(TAG,"three onError");
+                Log.d(TAG, "four onError");
             }
 
             @Override
-            public void onNext(MovieEntity movieEntity) {
-                Log.d(TAG,"three onNext="+movieEntity.toString());
+            public void onNext(List<SubjectBean> subjectBeen) {
+                for (int i = 0; i < subjectBeen.size(); i++) {
+                    Log.d(TAG, "four onNext=" + subjectBeen.get(i).toString());
+
+                }
             }
+
         };
 
         HttpMethods.getInstance().getTopMovie(subscriber, 0, 10);
